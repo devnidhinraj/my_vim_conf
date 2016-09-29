@@ -1,0 +1,120 @@
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" This is the Vundle package, which can be found on GitHub.
+" For GitHub repos, you specify plugins using the
+" 'user/repository' format
+Plugin 'gmarik/vundle'
+
+" We could also add repositories with a ".git" extension
+Plugin 'scrooloose/nerdtree.git'
+
+" To get plugins from Vim Scripts, you can reference the plugin
+" by name as it appears on the site
+Plugin 'Buffergator'
+
+"The way to navigate a file quickly, regardless of language.
+Plugin 'Lokaltog/vim-easymotion'
+
+" Allows you to change the order of arguments with ease.
+Plugin 'PeterRincker/vim-argumentative'
+
+"Automatically match pairs intelligently.
+Plugin 'Raimondi/delimitMate'
+
+"The best completion engine I’ve found.
+Plugin 'Valloric/YouCompleteMe'
+
+"My own, allows you to edit your quickfix list and write the changes to their files. Like find and replace, but better.
+Plugin 'Wolfy87/vim-enmasse'
+
+"The way to jump around your code base by rough file names.
+Plugin 'ctrlpvim/ctrlp.vim'
+
+"We work with a lot of it, show it some love.
+Plugin 'helino/vim-json'
+
+"Makes those funny alignment issues trivial.
+Plugin 'junegunn/vim-easy-align'
+
+"Provides pretty good completion in JavaScript, works great with YouCompleteMe. Checkout the tern website for more information.
+::Plugin 'marijnh/tern_for_vim'
+
+"Git info in the gutter.
+Plugin 'mhinz/vim-signify'
+
+"My favourite JavaScript syntax plugin of them all so far. (has great conceal features which I’ll talk about below)
+Plugin 'pangloss/vim-javascript'
+
+"We have to search for a lot of stuff across a lot of files, Ag does it best.
+Plugin 'rking/ag.vim'
+
+"Provides automatic JSHint linting. (among many other JavaScript linters, check the docs)
+Plugin 'scrooloose/syntastic'
+
+"Nice status bar
+Plugin 'bling/vim-airline'
+
+"Solorized theme
+Plugin 'altercation/vim-colors-solarized'
+
+"JSX Syntax highlighting
+Plugin 'mxw/vim-jsx'
+
+"JavaScript Syntax Library
+Plugin 'othree/javascript-libraries-syntax.vim'
+
+"JavaScript Parameter Complete
+Plugin 'othree/jspc.vim'
+
+"Js Beautify
+Plugin 'maksimr/vim-jsbeautify'
+
+ " add the repository path
+ set rtp+=/.vim/bundle/jsx.vim
+    "
+    "         " when you use a plugin manager (vundle or NeoBundle),
+    "             " just declare the repository path in your .vimrc
+    "
+    "                 " for vundle
+    Bundle 'git://github.com/jsx/jsx.vim.git'
+    "
+
+
+" Now we can turn our filetype functionality back on
+filetype plugin indent on
+
+set laststatus=2
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files"
+let g:syntastic_javascript_checkers = ['eslint']
+set nu
+
+let g:jsx_ext_required = 0
+
+syntax enable
+set background=dark
+colorscheme solarized
+
+autocmd FileType javascript setlocal equalprg=js-beautify\ --stdin
+
+map <c-f> :call JsBeautify()<cr>
+" or
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+" for json
+autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+" for jsx
+autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+" for html
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+" for css or scss
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
